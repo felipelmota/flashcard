@@ -5,6 +5,7 @@ import uuid from 'uuid/v4'
  * Action creators
  */
 const ADD = 'deck/ADD'
+const ADD_CARD = 'deck/ADD_CARD'
  
 export function addDeck(deck) {
   deck.id = uuid()
@@ -12,11 +13,19 @@ export function addDeck(deck) {
    return { type: ADD, deck }
 }
  
+export function addCardToDeck(deckId, card) {
+  return { type: ADD_CARD, deckId, card }
+}
+
 /*
  * Selectors
  */
 export function getMostRecentDeck(state) {
   return state.deck.byId[state.deck.mostRecent]
+}
+
+export function getDeck(state, deckId) {
+  return state.deck.byId[deckId]
 }
 
 export function getDecks(state) {
@@ -33,10 +42,20 @@ const INITIAL_STATE = {
 }
  
 export default function reducer(state = INITIAL_STATE, action = {}) {
+  let deck
   switch (action.type) {
     case ADD:
-      let deck = { [action.deck.id]: action.deck }
+      deck = { [action.deck.id]: action.deck };
+      return merge({}, state, { byId: deck, mostRecent: action.deck.id })
+
+    case ADD_CARD:
+      deck = state.byId[action.deckId]
+      deck = Object.assign({}, deck)
+      deck.cards.push(action.card)
+      deck = { [deck.id]: deck }
       return merge({}, state, { byId: deck, mostRecent: deck.id })
+
     default: return state
   }
 }
+

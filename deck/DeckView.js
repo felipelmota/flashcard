@@ -4,21 +4,27 @@ import globalStyles from '../ui/styles'
 import { gray, black, white } from '../utils/colors'
 import TextButton from '../ui/TextButton'
 import { connect } from "react-redux"
+import { NavigationActions } from 'react-navigation'
+import { getDeck, getMostRecentDeck } from './reducer'
  
 class DeckView extends React.Component {  
-  submit() {
-    Alert.alert('title', 'lol')
+  navigateTo(routeName, params={}) {
+    const navigate = NavigationActions.navigate({ routeName: routeName, params: params})
+    this.props.navigation.dispatch(navigate)
   }
    
   render() {
-    const { deck } = this.props.navigation.state.params
+    const deck = this.props.deck
 
     return (
       <View style={[styles.container, styles.center]}>
         <Text style={styles.deckTitle}>{deck.title}</Text>
-        <Text style={styles.deckDescription}>{deck.cards.length} cards</Text>
+        <Text style={styles.deckDescription}>{deck.cards.length} {deck.cards.length === 1 ? 'card' : 'cards'}</Text>
         <View style={styles.bottom}>
-          <TextButton style={styles.secondaryButton} txtStyle={styles.secondaryButtonText}>
+          <TextButton
+            style={styles.secondaryButton} txtStyle={styles.secondaryButtonText}
+            onPress={() => this.navigateTo('CardAdd', { deck })}
+          >
             Add cards
           </TextButton>
           <TextButton>Play!</TextButton>
@@ -50,10 +56,18 @@ const styles = StyleSheet.create({
   }
 })
 
-// function mapStateToProps(state) {
-//   return {
-//     deck: getDeckByIdyId(state, id)
-//   }
-// }
+function mapStateToProps(state, ownProps) {
+  const deckId = ownProps.navigation.state.params.deckId
+  let deck
 
-export default connect(null, null)(DeckView)
+  if (deckId) {
+    deck = getDeck(state, deckId)
+  } else {
+    deck = getMostRecentDeck(state)
+  }
+   return {
+    deck: deck
+  }
+}
+
+export default connect(mapStateToProps, null)(DeckView)

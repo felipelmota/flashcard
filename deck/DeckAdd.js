@@ -15,9 +15,8 @@ class DeckAdd extends React.Component {
     const { title } = this.state.form
     Alert.alert('title', title)
     this.props.addDeck({ title })
-
-    const deck = this.props.mostRecentDeck
-    const navigate = NavigationActions.navigate({ routeName: 'DeckView', params: { deck: deck }})
+    
+    const navigate = NavigationActions.navigate({ routeName: 'DeckView', params: { deckId: null }})
     this.props.navigation.dispatch(navigate)
   }
 

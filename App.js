@@ -10,6 +10,7 @@ import reducer from './app/rootReducer'
 import DeckList from './deck/DeckList'
 import DeckAdd from './deck/DeckAdd'
 import DeckView from "./deck/DeckView"
+import CardAdd from './card/CardAdd';
 
 import { purple, white, black } from './utils/colors'
 
@@ -68,6 +69,9 @@ const MainNavigator = StackNavigator({
         backgroundColor: purple,
       }
     }
+  },
+  CardAdd: {
+    screen: CardAdd
   }
 })
 

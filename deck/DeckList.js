@@ -11,7 +11,7 @@ import { NavigationActions } from "react-navigation"
 
  
 const IndividualDeck = (props) => {
-  const navigate = NavigationActions.navigate({ routeName: 'DeckView', params: { deck: props.deck }})
+  const navigate = NavigationActions.navigate({ routeName: 'DeckView', params: { deckId: props.deck.id }})
 
   return (
     <TouchableHighlight
@@ -23,7 +23,7 @@ const IndividualDeck = (props) => {
           {props.deck.title}
         </Text>
         <Text style={styles.deckList_item__description}>
-          {props.deck.cards.length} cards
+          {props.deck.cards.length} {props.deck.cards.length === 1 ? 'card' : 'cards'}
         </Text>
       </View>
     </TouchableHighlight>
