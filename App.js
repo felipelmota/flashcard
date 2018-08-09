@@ -3,13 +3,21 @@ import { Provider } from 'react-redux'
 import { createStore } from 'redux'
 import { StyleSheet, Text, View, Platform, StatusBar } from 'react-native'
 import { TabNavigator, StackNavigator } from 'react-navigation'
-import { FontAwesome, Ionics } from '@expo/vector-icons'
+import { FontAwesome, Ionicons } from '@expo/vector-icons';
 import { Constants } from 'expo'
 
 import reducer from './app/rootReducer'
 import DeckList from './deck/DeckList'
 import DeckAdd from './deck/DeckAdd'
 import { purple, white, black } from './utils/colors'
+
+const CustomStatusBar = ({ backgroundColor, ...props }) => {
+  return (
+    <View style={{ backgroundColor, height: Constants.statusBarHeight }}>
+      <StatusBar translucent backgroundColor={backgroundColor} {...props} />
+    </View>
+  )
+}
 
 const Tabs = TabNavigator({
   ListDecks: {
@@ -51,9 +59,8 @@ export default class App extends React.Component {
     return (
       <Provider store={createStore(reducer)}>
         <View style={styles.container}>
-          <Text>Open up App.js to start working on your app!</Text>
-          <Text>Changes you make will automatically reload.</Text>
-          <Text>Shake your phone to open the developer menu.</Text>
+          <CustomStatusBar backgroundColor={purple} barStyle="light-content" />
+          <Tabs />
         </View>
       </Provider>
     );
@@ -63,8 +70,6 @@ export default class App extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: '#fff'
   },
 });
