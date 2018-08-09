@@ -1,24 +1,20 @@
 import React from 'react'
 import { View, Text, StyleSheet, Alert } from 'react-native'
 import { getDeckById } from './reducer'
+import { connect } from "react-redux"
  
 class DeckView extends React.Component {  
   submit() {
-    Alert.alert('title', 'lol');
+    Alert.alert('title', 'lol')
   }
    
   render() {
+    const { deck } = this.props.navigation.state.params
+
     return (
       <View style={styles.container}>
         <Text>Add Deck</Text>
-         <Text>What is the title of your deck?</Text>
-         <TextInput
-          editable = {true}
-          maxLength = {40}
-        />
-         <TextButton style={{ padding: 10 }} onPress={this.submit}>
-          Submit
-        </TextButton>
+          <Text>{deck.title}</Text>
       </View>
     )
   }
@@ -29,14 +25,14 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'center'
   },
 })
 
-function mapStateToProps(state) {
-  return {
-    deck: getDeckByIdyId(state, id)
-  }
-}
+// function mapStateToProps(state) {
+//   return {
+//     deck: getDeckByIdyId(state, id)
+//   }
+// }
 
-export default connect(mapStateToProps, mapDispatchToProps)(DeckView)
+export default connect(null, null)(DeckView)

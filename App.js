@@ -9,6 +9,8 @@ import { Constants } from 'expo'
 import reducer from './app/rootReducer'
 import DeckList from './deck/DeckList'
 import DeckAdd from './deck/DeckAdd'
+import DeckView from "./deck/DeckView"
+
 import { purple, white, black } from './utils/colors'
 
 const CustomStatusBar = ({ backgroundColor, ...props }) => {
@@ -39,10 +41,10 @@ const Tabs = TabNavigator({
     header: null
   },
   tabBarOptions: {
-    activeTintColor: Platform.OS === 'ios' ? purple : black,
+    activeTintColor: black,
     style: {
       height: 56,
-      backgroundColor: Platform.OS === 'ios' ? black : purple,
+      backgroundColor: purple,
       shadowColor: 'rgba(0, 0, 0, 0.24)',
       shadowOffset: {
         width: 0,
@@ -54,13 +56,28 @@ const Tabs = TabNavigator({
   }
 })
 
+const MainNavigator = StackNavigator({
+  Home: {
+    screen: Tabs,
+  },
+  DeckView: {
+    screen: DeckView,
+    navigationOptions: {
+      headerTintColor: white,
+      headerStyle: {
+        backgroundColor: purple,
+      }
+    }
+  }
+})
+
 export default class App extends React.Component {
   render() {
     return (
       <Provider store={createStore(reducer)}>
         <View style={styles.container}>
           <CustomStatusBar backgroundColor={purple} barStyle="light-content" />
-          <Tabs />
+          <MainNavigator />
         </View>
       </Provider>
     );

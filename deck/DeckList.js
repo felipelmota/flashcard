@@ -5,10 +5,16 @@ import { Alert } from "react-native"
 import { getDecks } from "./reducer"
 import Header from "../ui/Header"
 import { gray } from "../utils/colors"
+import { NavigationActions } from "react-navigation"
  
 const IndividualDeck = (props) => {
+  const navigate = NavigationActions.navigate({ routeName: 'DeckView', params: { deck: props.deck }})
+
   return (
-    <TouchableHighlight onPress={() => Alert.alert("hey")} style={styles.deckList_item}>
+    <TouchableHighlight
+      onPress={() => props.navigation.dispatch(navigate)}
+      style={styles.deckList_item}
+    >
       <View>
         <Text style={styles.deckList_item__title}>
           {props.deck.title}
@@ -28,7 +34,7 @@ class DeckList extends React.Component {
         <Header>Deck List</Header>
          <View style={styles.deckList}>
           {this.props.decks.map((deck) => {
-            return <IndividualDeck deck={deck} key={deck.id} />
+            return <IndividualDeck deck={deck} key={deck.id} {...this.props} />
           })}
         </View>
       </View>
