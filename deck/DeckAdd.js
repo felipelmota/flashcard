@@ -1,17 +1,16 @@
 import React from 'react'
-import { View, Text, TextInput, StyleSheet, Alert } from 'react-native'
+import { View, Text, TextInput, StyleSheet } from 'react-native'
 import TextButton from '../ui/TextButton'
 import Header from "../ui/Header"
-import { purple, white } from "../utils/colors"
 import { connect } from "react-redux"
 import { NavigationActions } from "react-navigation"
 import { addDeck, getMostRecentDeck } from "./reducer"
 import globalStyles from '../ui/styles'
 
 class DeckAdd extends React.Component {
-  state = { form: { title: 'Write your title here' } }
+  state = { form: { title: null } }
    
-  submit() {
+  _submit() {
     const { title } = this.state.form
     Alert.alert('title', title)
     this.props.addDeck({ title })
@@ -31,8 +30,9 @@ class DeckAdd extends React.Component {
               editable={true}
               maxLength={40}
               onChangeText={(text) => this.setState({ form: { title: text }})}
+              placeholder="Write your title here..."
               value={this.state.form.title} />
-          <TextButton onPress={() => this.submit()}>
+          <TextButton onPress={() => this._submit()}>
             <Text style={styles.submitButtonText}>Submit</Text>
           </TextButton>
         </View>
@@ -51,9 +51,6 @@ const styles = StyleSheet.create({
     marginVertical: 20
   }, inputLabel: {
     fontSize: 25
-  }, textInput: {
-    fontSize: 20,
-    marginVertical: 20
   }
 })
 

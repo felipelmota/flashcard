@@ -1,7 +1,6 @@
 import React from 'react'
-import { View, Text, StyleSheet, TouchableHighlight } from 'react-native'
+import { View, Text, StyleSheet, TouchableHighlight, ScrollView } from 'react-native'
 import { connect } from "react-redux"
-import { Alert } from "react-native"
 import { getDecks } from "./reducer"
 import Header from "../ui/Header"
 import { gray } from '../utils/colors';
@@ -35,11 +34,11 @@ class DeckList extends React.Component {
     return (
       <View style={styles.container}>
         <Header>Deck List</Header>
-         <View style={styles.deckList}>
+        <ScrollView contentContainerStyle={styles.deckList}>
           {this.props.decks.map((deck) => {
             return <IndividualDeck deck={deck} key={deck.id} {...this.props} />
           })}
-        </View>
+        </ScrollView>
       </View>
     )
   }
