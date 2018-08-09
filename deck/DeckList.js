@@ -4,8 +4,11 @@ import { connect } from "react-redux"
 import { Alert } from "react-native"
 import { getDecks } from "./reducer"
 import Header from "../ui/Header"
-import { gray } from "../utils/colors"
+import { gray } from '../utils/colors';
+import globalStyles from '../ui/styles'
 import { NavigationActions } from "react-navigation"
+
+
  
 const IndividualDeck = (props) => {
   const navigate = NavigationActions.navigate({ routeName: 'DeckView', params: { deck: props.deck }})
@@ -43,11 +46,8 @@ class DeckList extends React.Component {
 }
  
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 20,
-    backgroundColor: '#fff',
-  }, deckList: {
+  ...globalStyles,
+  deckList: {
     flexDirection: 'column',
     marginVertical: 20,
     alignItems: 'center',

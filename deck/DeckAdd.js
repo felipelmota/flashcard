@@ -4,8 +4,10 @@ import TextButton from '../ui/TextButton'
 import Header from "../ui/Header"
 import { purple, white } from "../utils/colors"
 import { connect } from "react-redux"
-import { addDeck } from "./reducer"
- 
+import { NavigationActions } from "react-navigation"
+import { addDeck, getMostRecentDeck } from "./reducer"
+import globalStyles from '../ui/styles'
+
 class DeckAdd extends React.Component {
   state = { form: { title: 'Write your title here' } }
    
@@ -13,6 +15,10 @@ class DeckAdd extends React.Component {
     const { title } = this.state.form
     Alert.alert('title', title)
     this.props.addDeck({ title })
+
+    const deck = this.props.mostRecentDeck
+    const navigate = NavigationActions.navigate({ routeName: 'DeckView', params: { deck: deck }})
+    this.props.navigation.dispatch(navigate)
   }
 
   render() {
@@ -21,13 +27,13 @@ class DeckAdd extends React.Component {
         <Header>New Deck</Header>
          <View style={styles.content}>
           <Text style={styles.inputLabel}>What is the title of your deck?</Text>
-           <TextInput
-            style={styles.textInput}
-            editable={true}
-            maxLength={40}
-            onChangeText={(text) => this.setState({ form: { title: text }})}
-            value={this.state.form.title} />
-           <TextButton style={styles.submitButton} onPress={() => this.submit()}>
+            <TextInput
+              style={styles.textInput}
+              editable={true}
+              maxLength={40}
+              onChangeText={(text) => this.setState({ form: { title: text }})}
+              value={this.state.form.title} />
+          <TextButton onPress={() => this.submit()}>
             <Text style={styles.submitButtonText}>Submit</Text>
           </TextButton>
         </View>
@@ -37,6 +43,7 @@ class DeckAdd extends React.Component {
 }
 
 const styles = StyleSheet.create({
+  ...globalStyles,
   container: {
     flex: 1,
     backgroundColor: '#fff',
@@ -48,24 +55,16 @@ const styles = StyleSheet.create({
   }, textInput: {
     fontSize: 20,
     marginVertical: 20
-  }, submitButton: {
-    backgroundColor: purple,
-    padding: 10,
-    paddingLeft: 30,
-    paddingRight: 30,
-    height: 45,
-    borderRadius: 2,
-    justifyContent: 'center',
-    alignItems: 'center',
-  }, submitButtonText: {
-    color: white,
-    fontSize: 22,
-    textAlign: 'center'
   }
 })
- 
+
+const mapStateToProps = (state) => ({
+  mostRecentDeck: getMostRecentDeck(state)
+})
+
 const mapDispatchToProps = {
   addDeck: addDeck
 }
  
-export default connect(null, mapDispatchToProps)(DeckAdd)
+export default connect(mapStateToProps, mapDispatchToProps)(DeckAdd);
+
