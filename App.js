@@ -1,16 +1,17 @@
 import React from 'react'
 import { Provider } from 'react-redux'
 import { createStore } from 'redux'
-import { StyleSheet, Text, View, Platform, StatusBar } from 'react-native'
+import { StyleSheet, View, StatusBar } from 'react-native'
 import { TabNavigator, StackNavigator } from 'react-navigation'
-import { FontAwesome, Ionicons } from '@expo/vector-icons';
+import { FontAwesome, Ionicons } from '@expo/vector-icons'
 import { Constants } from 'expo'
 
 import reducer from './app/rootReducer'
 import DeckList from './deck/DeckList'
 import DeckAdd from './deck/DeckAdd'
 import DeckView from "./deck/DeckView"
-import CardAdd from './card/CardAdd';
+import CardAdd from './card/CardAdd'
+import DeckPlay from './deck/DeckPlay'
 
 import { purple, white, black } from './utils/colors'
 
@@ -72,6 +73,9 @@ const MainNavigator = StackNavigator({
   },
   CardAdd: {
     screen: CardAdd
+  },
+  DeckPlay: {
+    screen: DeckPlay
   }
 })
 

@@ -1,13 +1,18 @@
 import React from 'react'
-import { View, Text, StyleSheet, Alert } from 'react-native'
+import { View, Text, StyleSheet } from 'react-native'
 import globalStyles from '../ui/styles' 
 import { gray, black, white } from '../utils/colors'
 import TextButton from '../ui/TextButton'
 import { connect } from "react-redux"
 import { NavigationActions } from 'react-navigation'
 import { getDeck, getMostRecentDeck } from './reducer'
+
  
 class DeckView extends React.Component {  
+  static navigationOptions = {
+    title: 'View Deck'
+  }
+
   navigateTo(routeName, params={}) {
     const navigate = NavigationActions.navigate({ routeName: routeName, params: params})
     this.props.navigation.dispatch(navigate)
@@ -27,7 +32,9 @@ class DeckView extends React.Component {
           >
             Add cards
           </TextButton>
-          <TextButton>Play!</TextButton>
+          <TextButton onPress={() => this.navigateTo('DeckPlay', { deck })}>
+            Start quiz!
+          </TextButton>
         </View>
       </View>
     )
@@ -39,7 +46,7 @@ const styles = StyleSheet.create({
   center: {
     alignItems: 'center'
   }, deckTitle: {
-    fontSize: 45,
+    fontSize: 35,
   }, deckDescription: {
     color: gray,
     fontSize: 25,

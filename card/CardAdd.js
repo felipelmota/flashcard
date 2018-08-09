@@ -8,6 +8,10 @@ import globalStyles from '../ui/styles'
 import { addCardToDeck, getMostRecentDeck } from '../deck/reducer'
 
 class CardAdd extends React.Component {
+  static navigationOptions = {
+    title: 'Add Card'
+  }
+
   state = { form: { question: 'Question', answer: 'Answer' } }
   
   submit() {
@@ -25,30 +29,30 @@ class CardAdd extends React.Component {
 
     return (
       <View style={styles.container}>
-        <Header>Add Card</Header>
-          <Text style={styles.inputLabel}>Deck: {deck.title}</Text>
-          
-          <View style={styles.content}>
-            <Text style={styles.inputLabel}>Question:</Text>
+        <Header>Deck: {deck.title}</Header>
 
-            <TextInput
-              style={styles.textInput}
-              editable={true}
-              maxLength={40}
-              onChangeText={(text) => this.setState({ form: { question: text }})}
-              value={this.state.form.question} />
+        <Text style={styles.inputLabel}>Deck: {deck.title}</Text>
+        <View style={styles.content}>
+          <Text style={styles.inputLabel}>Question:</Text>
 
-            <Text style={styles.inputLabel}>Answer:</Text>
+          <TextInput
+            style={styles.textInput}
+            editable={true}
+            maxLength={40}
+            onChangeText={(text) => this.setState({ form: { question: text }})}
+            value={this.state.form.question} />
 
-            <TextInput
-              style={styles.textInput}
-              editable={true}
-              maxLength={40}
-              onChangeText={(text) => this.setState({ form: { answer: text }})}
-              value={this.state.form.answer} />
-            <TextButton onPress={() => this.submit()}>
-              Submit
-            </TextButton>
+          <Text style={styles.inputLabel}>Answer:</Text>
+
+          <TextInput
+            style={styles.textInput}
+            editable={true}
+            maxLength={40}
+            onChangeText={(text) => this.setState({ form: { answer: text }})}
+            value={this.state.form.answer} />
+          <TextButton onPress={() => this.submit()}>
+            Submit
+          </TextButton>
         </View>
       </View>
     );
