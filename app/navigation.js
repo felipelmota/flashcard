@@ -2,7 +2,7 @@
 import React from 'react'
 import { TabNavigator, StackNavigator } from 'react-navigation'
 import { FontAwesome, Ionicons } from '@expo/vector-icons'
-import DeckView from "../deck/DeckView"
+import DeckView from '../deck/DeckView'
 import CardAdd from '../card/CardAdd'
 import DeckPlay from '../deck/DeckPlay'
 import DeckList from '../deck/DeckList'
@@ -14,15 +14,15 @@ export const Tabs = TabNavigator({
     screen: DeckList,
     navigationOptions: {
       tabBarLabel: 'Decks',
-      tabBarIcon: ({ tintColor }) => <Ionicons name='ios-bookmarks' size={30} color={tintColor} />
-    },
+      tabBarIcon: ({ tintColor }) => <Ionicons name="ios-bookmarks" size={30} color={tintColor} />
+    }
   },
   AddDeck: {
     screen: DeckAdd,
     navigationOptions: {
       tabBarLabel: 'New Deck',
-      tabBarIcon: ({ tintColor }) => <FontAwesome name='plus-square' size={30} color={tintColor} />
-    },
+      tabBarIcon: ({ tintColor }) => <FontAwesome name="plus-square" size={30} color={tintColor} />
+    }
   }
 }, {
   navigationOptions: {
