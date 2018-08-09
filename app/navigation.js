@@ -1,6 +1,7 @@
 
 import React from 'react'
-import { TabNavigator, StackNavigator } from 'react-navigation'
+import { Platform } from 'react-native'
+import { createStackNavigator, createBottomTabNavigator, createMaterialTopTabNavigator } from 'react-navigation'
 import { FontAwesome, Ionicons } from '@expo/vector-icons'
 import DeckView from '../deck/DeckView'
 import CardAdd from '../card/CardAdd'
@@ -8,8 +9,28 @@ import DeckPlay from '../deck/DeckPlay'
 import DeckList from '../deck/DeckList'
 import DeckAdd from '../deck/DeckAdd'
 import { purple, white } from '../utils/colors'
- 
-export const Tabs = TabNavigator({
+
+const TabNavigatorConfig = {
+  navigationOptions: {
+    header: null
+  },
+  tabBarOptions: {
+    activeTintColor: Platform.OS === "ios" ? purple : white,
+    style: {
+      height: 56,
+      backgroundColor: Platform.OS === "ios" ? white : purple,
+      shadowColor: "rgba(0, 0, 0, 0.24)",
+      shadowOffset: {
+        width: 0,
+        height: 3
+      },
+      shadowRadius: 6,
+      shadowOpacity: 1
+    }
+  }
+}
+
+const RouteConfigs = {
   ListDecks: {
     screen: DeckList,
     navigationOptions: {
@@ -24,27 +45,11 @@ export const Tabs = TabNavigator({
       tabBarIcon: ({ tintColor }) => <FontAwesome name="plus-square" size={30} color={tintColor} />
     }
   }
-}, {
-  navigationOptions: {
-    header: null
-  },
-  tabBarOptions: {
-    activeTintColor: white,
-    style: {
-      height: 56,
-      backgroundColor: purple,
-      shadowColor: 'rgba(0, 0, 0, 0.24)',
-      shadowOffset: {
-        width: 0,
-        height: 3
-      },
-      shadowRadius: 6,
-      shadowOpacity: 1
-    }
-  }
-})
+}
 
-export const MainNavigator = StackNavigator({
+export const Tabs = Platform.OS === "ios" ? createBottomTabNavigator(RouteConfigs, TabNavigatorConfig) : createMaterialTopTabNavigator(RouteConfigs, TabNavigatorConfig)
+
+export const MainNavigator = createStackNavigator({
   Home: {
     screen: Tabs,
   },

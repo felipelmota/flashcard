@@ -1,8 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Text, View, StyleSheet, TouchableOpacity } from 'react-native'
-import { black, gray, lightgray } from '../utils/colors'
 import FlipCard from 'react-native-flip-card'
+import { Text, View, StyleSheet } from 'react-native'
+import { black, gray, lightgray } from '../utils/colors'
 import { Dimensions } from 'react-native'
 
  class CardFlippable extends React.Component {

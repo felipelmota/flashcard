@@ -1,14 +1,12 @@
 import React from 'react'
-import { View, Text, StyleSheet, TouchableHighlight, ScrollView } from 'react-native'
-import { connect } from "react-redux"
-import { getDecks } from "./reducer"
-import Header from "../ui/Header"
-import { gray } from '../utils/colors';
+import Header from '../ui/Header'
 import globalStyles from '../ui/styles'
+import { gray } from '../utils/colors'
 import { NavigationActions } from "react-navigation"
+import { View, Text, StyleSheet, TouchableHighlight, ScrollView } from 'react-native'
+import { connect } from 'react-redux'
+import { getDecks } from './reducer'
 
-
- 
 const IndividualDeck = (props) => {
   const navigate = NavigationActions.navigate({ routeName: 'DeckView', params: { deckId: props.deck.id }})
 

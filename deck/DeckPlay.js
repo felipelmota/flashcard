@@ -1,10 +1,10 @@
 import React from 'react'
-import { View, Text, StyleSheet } from 'react-native'
- import globalStyles from '../ui/styles'
-import { gray, black, white, red, green } from '../utils/colors'
-import TextButton from '../ui/TextButton'
+import globalStyles from '../ui/styles'
 import CardFlippable from '../card/CardFlippable'
+import TextButton from '../ui/TextButton'
+import { gray, red, green } from '../utils/colors'
 import { setDailyNotification } from '../utils/notifications'
+import { View, Text, StyleSheet } from 'react-native'
 
 class DeckPlay extends React.Component {
   static navigationOptions = {
@@ -25,10 +25,10 @@ class DeckPlay extends React.Component {
   }
   
   _content() {
-    const { deck } = this.props.navigation.state.params;
+    const { deck } = this.props.navigation.state.params
      
     if (this._hasFinishedGame()) {
-      setDailyNotification({ startingFromDay: 1, overwriteExisting: true });
+      setDailyNotification({ startingFromDay: 1, overwriteExisting: true })
 
       return (
         <View style={{ flex: 1, justifyContent: 'center' }}>

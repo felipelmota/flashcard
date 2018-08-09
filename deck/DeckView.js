@@ -1,13 +1,13 @@
 import React from 'react'
-import { View, Text, StyleSheet } from 'react-native'
 import globalStyles from '../ui/styles' 
-import { gray, black, white } from '../utils/colors'
 import TextButton from '../ui/TextButton'
-import { connect } from "react-redux"
 import { NavigationActions } from 'react-navigation'
+import { gray, black, white } from '../utils/colors'
+import { View, Text, StyleSheet } from 'react-native'
 import { getDeck, getMostRecentDeck } from './reducer'
+import { connect } from "react-redux"
 
- 
+
 class DeckView extends React.Component {  
   static navigationOptions = {
     title: 'View Deck'

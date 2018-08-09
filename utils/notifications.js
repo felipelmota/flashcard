@@ -1,7 +1,8 @@
-import { Notifications, Permissions } from 'expo';
-import { AsyncStorage } from 'react-native';
- const NOTIFICATION_KEY = 'mobile-flashcards:notification';
- function createNotification() {
+import { Notifications, Permissions } from 'expo'
+import { AsyncStorage } from 'react-native'
+ 
+const NOTIFICATION_KEY = 'mobile-flashcards:notification'
+function createNotification() {
   return {
     title: 'Go through your deck of flash cards!',
     body: "👋 don't forget to go through your deck of flash cards today!",
@@ -25,19 +26,19 @@ import { AsyncStorage } from 'react-native';
 export function setDailyNotification({ startingFromDayOffeset = 0, overwriteExisting = false }) {
   Permissions.askAsync(Permissions.NOTIFICATIONS).then(({ status }) => {
     if (status !== 'granted') return
-     AsyncStorage.getItem(NOTIFICATION_KEY).then((data) => {
+      AsyncStorage.getItem(NOTIFICATION_KEY).then((data) => {
       console.log('[Notification] Loading', data)
       data = JSON.parse(data)
        if (data && !overwriteExisting) {
         console.log("[Notification] Existing data and no overwriting")
         return
       }
-       Notifications.cancelAllScheduledNotificationsAsync()
-       let startDate = new Date()
+      Notifications.cancelAllScheduledNotificationsAsync()
+      let startDate = new Date()
       startDate.setDate(startDate.getDate() + startingFromDayOffeset)
       startDate.setHours(20)
       startDate.setMinutes(0)
-       Notifications.scheduleLocalNotificationAsync(
+      Notifications.scheduleLocalNotificationAsync(
         createNotification(), { time: startDate, repeat: 'day' }
       )
       

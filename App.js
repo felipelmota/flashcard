@@ -1,14 +1,14 @@
 import React from 'react'
-import { Provider } from 'react-redux'
-import { applyMiddleware, createStore } from 'redux'
-import { StyleSheet, View, Text } from 'react-native'
 import PropTypes from 'prop-types'
 import reducer from './app/rootReducer'
-import { purple } from './utils/colors'
-import { fetchStateFromStorage, submitStateToStorage } from './utils/storage'
-import { MainNavigator } from './app/navigation'
 import CustomStatusBar from './ui/CustomStatusBar'
+import { MainNavigator } from './app/navigation'
+import { Provider } from 'react-redux'
+import { fetchStateFromStorage, submitStateToStorage } from './utils/storage'
 import { setDailyNotification } from './utils/notifications'
+import { applyMiddleware, createStore } from 'redux'
+import { StyleSheet, View, Text } from 'react-native'
+import { purple } from './utils/colors'
 
 /* Update local storage after each store update */
 const storageMiddleware = store => next => (action) => {

@@ -64,7 +64,7 @@ class CardAdd extends React.Component {
           </TextButton>
         </View>
       </View>
-    );
+    )
   }
 }
 

@@ -1,10 +1,10 @@
 import React from 'react'
 import { View, Text, TextInput, StyleSheet } from 'react-native'
 import TextButton from '../ui/TextButton'
-import Header from "../ui/Header"
-import { connect } from "react-redux"
-import { NavigationActions } from "react-navigation"
-import { addDeck, getMostRecentDeck } from "./reducer"
+import Header from '../ui/Header'
+import { connect } from 'react-redux'
+import { NavigationActions } from 'react-navigation'
+import { addDeck, getMostRecentDeck } from './reducer'
 import globalStyles from '../ui/styles'
 
 class DeckAdd extends React.Component {
@@ -12,7 +12,6 @@ class DeckAdd extends React.Component {
    
   _submit() {
     const { title } = this.state.form
-    Alert.alert('title', title)
     this.props.addDeck({ title })
     
     const navigate = NavigationActions.navigate({ routeName: 'DeckView', params: { deckId: null }})
@@ -62,5 +61,5 @@ const mapDispatchToProps = {
   addDeck: addDeck
 }
  
-export default connect(mapStateToProps, mapDispatchToProps)(DeckAdd);
+export default connect(mapStateToProps, mapDispatchToProps)(DeckAdd)
 
