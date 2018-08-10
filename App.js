@@ -1,14 +1,14 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import reducer from './app/rootReducer'
 import CustomStatusBar from './ui/CustomStatusBar'
-import { MainNavigator } from './app/navigation'
+import setDailyNotification from './utils/notifications'
+
+import { purple } from './utils/colors'
 import { Provider } from 'react-redux'
-import { fetchStateFromStorage, submitStateToStorage } from './utils/storage'
-import { setDailyNotification } from './utils/notifications'
+import { MainNavigator } from './app/navigation'
 import { applyMiddleware, createStore } from 'redux'
 import { StyleSheet, View, Text } from 'react-native'
-import { purple } from './utils/colors'
+import { fetchStateFromStorage, submitStateToStorage } from './utils/storage'
 
 /* Update local storage after each store update */
 const storageMiddleware = store => next => (action) => {
@@ -48,7 +48,7 @@ class App extends React.Component {
   }
 
   render() {
-    if (this.state.isStoreLoading) {
+    if (this.state.isLoading) {
       return (
         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
           <Text>Loading...</Text>
@@ -65,10 +65,6 @@ class App extends React.Component {
       </Provider>
     )
   }
-}
-
-App.propTypes = {
-  dispatch: PropTypes.func.isRequired
 }
 
 const styles = StyleSheet.create({

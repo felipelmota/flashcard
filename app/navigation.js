@@ -3,11 +3,13 @@ import React from 'react'
 import { Platform } from 'react-native'
 import { createStackNavigator, createBottomTabNavigator, createMaterialTopTabNavigator } from 'react-navigation'
 import { FontAwesome, Ionicons } from '@expo/vector-icons'
+
 import DeckView from '../deck/DeckView'
 import CardAdd from '../card/CardAdd'
 import DeckPlay from '../deck/DeckPlay'
 import DeckList from '../deck/DeckList'
 import DeckAdd from '../deck/DeckAdd'
+
 import { purple, white } from '../utils/colors'
 
 const TabNavigatorConfig = {

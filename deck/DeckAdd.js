@@ -22,15 +22,18 @@ class DeckAdd extends React.Component {
     return (
       <View style={styles.container}>
         <Header>New Deck</Header>
-         <View style={styles.content}>
+         
+        <View style={styles.content}>
           <Text style={styles.inputLabel}>What is the title of your deck?</Text>
-            <TextInput
-              style={styles.textInput}
-              editable={true}
-              maxLength={40}
-              onChangeText={(text) => this.setState({ form: { title: text }})}
-              placeholder="Write your title here..."
-              value={this.state.form.title} />
+            
+          <TextInput
+            style={styles.textInput}
+            editable={true}
+            maxLength={40}
+            onChangeText={(text) => this.setState({ form: { title: text }})}
+            placeholder="Write your title here..."
+            value={this.state.form.title} />
+
           <TextButton onPress={() => this._submit()}>
             <Text style={styles.submitButtonText}>Submit</Text>
           </TextButton>
@@ -62,4 +65,3 @@ const mapDispatchToProps = {
 }
  
 export default connect(mapStateToProps, mapDispatchToProps)(DeckAdd)
-

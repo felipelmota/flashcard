@@ -17,9 +17,8 @@ class CardAdd extends React.Component {
   _submit() {
     const { deck } = this.props.navigation.state.params
     const card = this.state.form
-
     this.props.addCardToDeck(deck.id, card)
-     // const navigate = NavigationActions.navigate({ routeName: 'DeckView', params: { deckId: deck.id }})
+    
     const navigate = NavigationActions.back()
     this.props.navigation.dispatch(navigate)
   }

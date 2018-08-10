@@ -1,38 +1,40 @@
 import React from 'react'
-import globalStyles from '../ui/styles' 
+import globalStyles from '../ui/styles'
 import TextButton from '../ui/TextButton'
-import { NavigationActions } from 'react-navigation'
-import { gray, black, white } from '../utils/colors'
+
+import { gray } from '../utils/colors'
+import { connect } from 'react-redux'
 import { View, Text, StyleSheet } from 'react-native'
+import { NavigationActions } from 'react-navigation'
 import { getDeck, getMostRecentDeck } from './reducer'
-import { connect } from "react-redux"
 
-
-class DeckView extends React.Component {  
+class DeckView extends React.Component {
   static navigationOptions = {
     title: 'View Deck'
   }
 
-  navigateTo(routeName, params={}) {
-    const navigate = NavigationActions.navigate({ routeName: routeName, params: params})
+  _navigateTo(routeName, params = {}) {
+    const navigate = NavigationActions.navigate({ routeName, params })
     this.props.navigation.dispatch(navigate)
   }
-   
+
   render() {
-    const deck = this.props.deck
+    const { deck } = this.props
 
     return (
       <View style={[styles.container, styles.center]}>
         <Text style={styles.deckTitle}>{deck.title}</Text>
         <Text style={styles.deckDescription}>{deck.cards.length} {deck.cards.length === 1 ? 'card' : 'cards'}</Text>
+
         <View style={styles.bottom}>
           <TextButton
-            style={styles.secondaryButton} txtStyle={styles.secondaryButtonText}
-            onPress={() => this.navigateTo('CardAdd', { deck })}
+            style={styles.secondaryButton}
+            txtStyle={styles.secondaryButtonText}
+            onPress={() => this._navigateTo('CardAdd', { deck })}
           >
             Add card
           </TextButton>
-          <TextButton onPress={() => this.navigateTo('DeckPlay', { deck })}>
+          <TextButton onPress={() => this._navigateTo('DeckPlay', { deck })}>
             Start quiz!
           </TextButton>
         </View>
@@ -40,7 +42,7 @@ class DeckView extends React.Component {
     )
   }
 }
- 
+
 const styles = StyleSheet.create({
   ...globalStyles,
   center: {
@@ -53,18 +55,11 @@ const styles = StyleSheet.create({
     padding: 20
   }, bottom: {
     alignSelf: 'stretch',
-  }, secondaryButton: {
-    marginBottom: 10,
-    backgroundColor: white,
-    borderColor: black,
-    borderWidth: 1
-  }, secondaryButtonText: {
-    color: black
   }
 })
 
 function mapStateToProps(state, ownProps) {
-  const deckId = ownProps.navigation.state.params.deckId
+  const { deckId } = ownProps.navigation.state.params
   let deck
 
   if (deckId) {
@@ -72,8 +67,9 @@ function mapStateToProps(state, ownProps) {
   } else {
     deck = getMostRecentDeck(state)
   }
-   return {
-    deck: deck
+
+  return {
+    deck
   }
 }
 

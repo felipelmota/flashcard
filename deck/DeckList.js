@@ -1,14 +1,15 @@
 import React from 'react'
 import Header from '../ui/Header'
 import globalStyles from '../ui/styles'
+
 import { gray } from '../utils/colors'
-import { NavigationActions } from "react-navigation"
-import { View, Text, StyleSheet, TouchableHighlight, ScrollView } from 'react-native'
 import { connect } from 'react-redux'
 import { getDecks } from './reducer'
+import { NavigationActions } from 'react-navigation'
+import { View, Text, StyleSheet, TouchableHighlight, ScrollView } from 'react-native'
 
 const IndividualDeck = (props) => {
-  const navigate = NavigationActions.navigate({ routeName: 'DeckView', params: { deckId: props.deck.id }})
+  const navigate = NavigationActions.navigate({ routeName: 'DeckView', params: { deckId: props.deck.id } })
 
   return (
     <TouchableHighlight
@@ -26,22 +27,17 @@ const IndividualDeck = (props) => {
     </TouchableHighlight>
   )
 }
- 
-class DeckList extends React.Component {
-  render() {
-    return (
-      <View style={styles.container}>
-        <Header>Deck List</Header>
-        <ScrollView contentContainerStyle={styles.deckList}>
-          {this.props.decks.map((deck) => {
-            return <IndividualDeck deck={deck} key={deck.id} {...this.props} />
-          })}
-        </ScrollView>
-      </View>
-    )
-  }
-}
- 
+
+const DeckList = props => (
+  <View style={styles.container}>
+    <Header>Deck List</Header>
+
+    <ScrollView contentContainerStyle={styles.deckList}>
+      {props.decks.map(deck => <IndividualDeck deck={deck} key={deck.id} {...props} />)}
+    </ScrollView>
+  </View>
+)
+
 const styles = StyleSheet.create({
   ...globalStyles,
   deckList: {
@@ -64,11 +60,11 @@ const styles = StyleSheet.create({
     textAlign: 'right'
   }
 })
- 
+
 function mapStateToProps(state) {
   return {
     decks: getDecks(state)
   }
 }
- 
-export default connect( mapStateToProps )(DeckList)
+
+export default connect(mapStateToProps)(DeckList)
