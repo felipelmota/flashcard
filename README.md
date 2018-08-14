@@ -62,6 +62,10 @@ $ yarn install
 
 ## Build
 
+```bash
+$ yarn start
+```
+
 For more details on how to run build the app and deploy it to application stores, please follow [expo](https://docs.expo.io/versions/latest/introduction/project-lifecycle.html) documentation.
 
 - Tested on a Motorola Moto G2 Android device and on the Genymotion emulator.
@@ -97,4 +101,4 @@ $ yarn run eslint
 
 ## License
 
-This project is licensed under the MIT License. Check the `LICENSE` file.
+This project is licensed under the MIT License.
